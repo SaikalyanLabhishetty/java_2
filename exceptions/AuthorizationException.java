@@ -1,5 +1,7 @@
 package exceptions;
 
-public class AuthorizationException {
-    
+public class AuthorizationException extends Exception {
+    public AuthorizationException(String message) {
+        super(message);
+    }
 }
