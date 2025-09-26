@@ -1,9 +1,9 @@
+import java.io.*;
 import java.util.ArrayList;
-
 import exceptions.AuthorizationException;
 import exceptions.BedAssignmentException;
 
-public class CareHome {
+public class CareHome implements Serializable{
     private ArrayList<Resident> residents;
     private ArrayList<Staff> staff;
     private ArrayList<Room> rooms;
@@ -98,5 +98,31 @@ public class CareHome {
             throw new AuthorizationException("Only doctors can prescribe medication.");
         }
         resident.addPrescription(prescription);
+    }
+
+    public void initializeRooms() {
+    Room room1 = new Room("Room1", 5); // creates beds Room1-B1 to Room1-B5
+    Room room2 = new Room("Room2", 5);
+    rooms.add(room1);
+    rooms.add(room2);
+}
+
+
+    public void saveData(String filename) throws IOException {
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename));
+        out.writeObject(residents);
+        out.writeObject(staff);
+        out.writeObject(rooms);
+        out.close();
+        System.out.println("Data saved.");
+    }
+
+    public void loadData(String filename) throws IOException, ClassNotFoundException {
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename));
+        residents = (ArrayList<Resident>) in.readObject();
+        staff = (ArrayList<Staff>) in.readObject();
+        rooms = (ArrayList<Room>) in.readObject();
+        in.close();
+        System.out.println("Data loaded.");
     }
 }

@@ -1,5 +1,6 @@
+import java.io.Serializable;
 import java.util.ArrayList;
-public class Resident {
+public class Resident implements Serializable{
     private String residentId;
     private String name;
     private String gender;
