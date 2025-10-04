@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
+
 import exceptions.AuthorizationException;
 import exceptions.BedAssignmentException;
 
@@ -124,5 +126,8 @@ public class CareHome implements Serializable{
         rooms = (ArrayList<Room>) in.readObject();
         in.close();
         System.out.println("Data loaded.");
+    }
+    public List<Resident> getAllResidents() {
+        return new ArrayList<>(residents); // Or residents.values() if you're using a Map
     }
 }
