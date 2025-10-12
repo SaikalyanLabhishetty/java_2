@@ -7,7 +7,6 @@ public class Doctor extends Staff {
 
     @Override
     public void performDuty() {
-        // Example implementation - can be customized as needed
         System.out.println("Doctor is prescribing medication.");
     }
 
@@ -16,5 +15,33 @@ public class Doctor extends Staff {
             throw new AuthorizationException("Only doctors can prescribe medications.");
         }
         resident.addPrescription(prescription);
+    }
+
+    @Override
+    public String getRole() {
+        return "Doctor";
+    }
+
+    @Override
+    public boolean canPerformAction(String action) {
+        return true;
+    }
+    
+    @Override
+    public String toString() {
+        return "Doctor{staffId='" + staffId + "', name='" + name + "'}";
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Doctor doctor = (Doctor) obj;
+        return staffId.equals(doctor.staffId);
+    }
+    
+    @Override
+    public int hashCode() {
+        return staffId.hashCode();
     }
 }

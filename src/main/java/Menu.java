@@ -12,8 +12,9 @@ public class Menu {
         careHome.initializeRooms();
         scanner = new Scanner(System.in);
         // Load saved data
+        // In Menu constructor
         try {
-            careHome.loadData("carehome.dat");
+            careHome.loadStateFromFile("carehome.dat");
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("No saved data found or corrupt. Starting fresh.");
         }
@@ -119,7 +120,8 @@ public class Menu {
 
     private void saveAndExit() {
         try {
-            careHome.saveData("carehome.dat");
+            // In saveAndExit() method
+            careHome.saveStateToFile("carehome.dat");
             System.out.println("Data saved. Exiting...");
         } catch (IOException e) {
             System.out.println("Error saving data: " + e.getMessage());
