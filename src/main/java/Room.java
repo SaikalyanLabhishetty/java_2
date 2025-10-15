@@ -33,6 +33,16 @@ public class Room implements Serializable {
         return new ArrayList<>(beds); // Return a copy to prevent external modification
     }
     
+    // *** KEY FIX: Added hasAvailableBed() method ***
+    public boolean hasAvailableBed() {
+        for (Bed bed : beds) {
+            if (bed.getOccupant() == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     @Override
     public String toString() {
         return "Room{roomId='" + roomId + "', BedCount=" + beds.size() + "}";
